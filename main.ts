@@ -1,5 +1,5 @@
 input.onButtonPressed(Button.A, function () {
-    sense = sense + 100
+    sense = sense - 100
     Showsense()
 })
 function Showsense () {
@@ -14,16 +14,20 @@ input.onButtonPressed(Button.AB, function () {
     Showsense()
 })
 input.onButtonPressed(Button.B, function () {
-    sense = sense - 100
+    sense = sense + 100
     Showsense()
 })
-let y = 0
 let x = 0
+let y = 0
 let sense = 0
 sense = 700
 Showsense()
+basic.pause(5000)
+basic.clearScreen()
 basic.forever(function () {
     basic.clearScreen()
+    y = input.acceleration(Dimension.Y)
+    x = input.acceleration(Dimension.X)
     if (x < -700) {
         x = -700
     }
@@ -36,8 +40,6 @@ basic.forever(function () {
     if (y > 700) {
         y = 700
     }
-    x = input.acceleration(Dimension.X)
-    y = input.acceleration(Dimension.Y)
     x = Math.map(x, sense * -1, sense, 4, 0)
     y = Math.map(y, sense * -1, sense, 4, 0)
     led.plot(x, y)
